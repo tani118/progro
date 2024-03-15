@@ -17,23 +17,15 @@ def extract_keywords(sentences, target_word):
     
     return matching_sentences
 
-if __name__ == "__main__":
-    # Extract input from command-line arguments
-    input_data = json.loads(sys.argv[1])
+# Example usage:
+sentences = ["Python is better than C++", "Java is another programming language"]
+keyword_dict = extract_keywords(sentences)
+target_word = "Python"
+matching_sentences = match_keyword(keyword_dict, target_word)
 
-    # Extract nested sentences
-    nested_sentences = [(item[0], item[1]) for item in input_data]
-
-    # Specify the target word
-    target_word = "Python"
-
-    # Extract matching sentences
-    matching_sentences = extract_keywords(nested_sentences, target_word)
-
-    # Output the result
-    if matching_sentences:
-        print(f"The target word '{target_word}' exists in the following sentences:")
-        for sentence in matching_sentences:
-            print(sentence)
-    else:
-        print(f"The target word '{target_word}' does not exist in any sentence.")
+if matching_sentences:
+    print(f"The target word '{target_word}' exists in the following sentences:")
+    for idx in matching_sentences:
+        print(f"Sentence {idx + 1}: {sentences[idx]}")
+else:
+    print(f"The target word '{target_word}' does not exist in any sentence.")
