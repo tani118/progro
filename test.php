@@ -40,7 +40,9 @@ if (isset($data['items'])) {
     $user_input = array();
     // Output the repository information
     foreach ($repositories as $repo) {
-        $loopInput = array($repo['full_name'], $repo['Description']);
+        $desc = ucwords($repo['description']);
+        $fname = ucwords($repo['full_name']);
+        $loopInput = array($fname, $desc);
         array_push($user_input, $loopInput);
     }
 
