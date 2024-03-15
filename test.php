@@ -40,15 +40,10 @@ if (isset($data['items'])) {
     $user_input = array();
     // Output the repository information
     foreach ($repositories as $repo) {
-        echo 'Repository Name: ' . $repo['full_name'] . '<br>';
-        echo 'Stars: ' . $repo['stargazers_count'] . '<br>';
-        echo 'URL: ' . $repo['html_url'] . '<br>';
-        echo 'Description: ' . $repo['description'] . '<br>';
-        echo '<hr>';
         $loopInput = array($repo['full_name'], $repo['Description']);
         array_push($user_input, $loopInput);
     }
-    
+
     $output = exec("python ai_script.py $user_input");
 
 } else {
