@@ -4,7 +4,7 @@
 $ch = curl_init();
 
 // Define search criteria for repositories written in C++ with stars between 500 and 1000
-$search_criteria = 'language:cpp stars:500..1000'; 
+$search_criteria = 'language:cpp stars:500..1000'; // Example: Repositories with 500 - 1000 stars
 
 // Set the URL for GitHub API search endpoint
 $url = 'https://api.github.com/search/repositories?q=' . urlencode($search_criteria);
@@ -16,7 +16,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 // Set headers for authentication and user-agent
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'User-Agent: PHP',
-    'Authorization: token _____',
+    'Authorization: token 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',
 ]);
 
 // Execute the request
