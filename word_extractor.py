@@ -1,35 +1,39 @@
+import sys
+import json
 import spacy
 
-def extract_keywords(sentences):
+def extract_keywords(sentences, target_word):
     nlp = spacy.load("en_core_web_lg")
-    keyword_dict = {}
-    
-    for idx, sentence in enumerate(sentences):
+    matching_sentences = []
+
+    for sentence_name, sentence in sentences:
         doc = nlp(sentence)
         keywords = []
         for token in doc:
             if token.pos_ in ["NOUN", "PROPN", "VERB"] and not token.is_stop:
                 keywords.append(token.text)
-        keyword_dict[idx] = keywords
-    
-    return keyword_dict
-
-def match_keyword(keyword_dict, target_word):
-    matching_sentences = []
-    for idx, keywords in keyword_dict.items():
         if target_word in keywords:
-            matching_sentences.append(idx)
+            matching_sentences.append(sentence_name)
+    
     return matching_sentences
 
-# Example usage:
-sentences = ["Python is better than C++", "Java is another programming language"]
-keyword_dict = extract_keywords(sentences)
-target_word = "Python"
-matching_sentences = match_keyword(keyword_dict, target_word)
+if __name__ == "__main__":
+    # Extract input from command-line arguments
+    input_data = json.loads(sys.argv[1])
 
-if matching_sentences:
-    print(f"The target word '{target_word}' exists in the following sentences:")
-    for idx in matching_sentences:
-        print(f"Sentence {idx + 1}: {sentences[idx]}")
-else:
-    print(f"The target word '{target_word}' does not exist in any sentence.")
+    # Extract nested sentences
+    nested_sentences = [(item[0], item[1]) for item in input_data]
+
+    # Specify the target word
+    target_word = "Python"
+
+    # Extract matching sentences
+    matching_sentences = extract_keywords(nested_sentences, target_word)
+
+    # Output the result
+    if matching_sentences:
+        print(f"The target word '{target_word}' exists in the following sentences:")
+        for sentence in matching_sentences:
+            print(sentence)
+    else:
+        print(f"The target word '{target_word}' does not exist in any sentence.")
