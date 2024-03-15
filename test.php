@@ -4,7 +4,7 @@
 $ch = curl_init();
 
 // Define search criteria for repositories written in C++ with stars between 500 and 1000
-$search_criteria = 'language:cpp stars:500..1000'; // Example: Repositories with 500 - 1000 stars
+$search_criteria = 'language:cpp stars:500..1000'; 
 
 // Set the URL for GitHub API search endpoint
 $url = 'https://api.github.com/search/repositories?q=' . urlencode($search_criteria);
