@@ -1,5 +1,3 @@
-import sys
-import json
 import spacy
 
 def extract_keywords(sentences, target_word):
@@ -18,14 +16,17 @@ def extract_keywords(sentences, target_word):
     return matching_sentences
 
 # Example usage:
-sentences = ["Python is better than C++", "Java is another programming language"]
-keyword_dict = extract_keywords(sentences)
+nested_sentences = [
+    ["Sentence 1","Python is better than C++"],
+    ["Sentence 2","Java is another programming language other than Python"]
+]
+
 target_word = "Python"
-matching_sentences = match_keyword(keyword_dict, target_word)
+matching_sentences = extract_keywords(nested_sentences, target_word)
 
 if matching_sentences:
     print(f"The target word '{target_word}' exists in the following sentences:")
-    for idx in matching_sentences:
-        print(f"Sentence {idx + 1}: {sentences[idx]}")
+    for sentence in matching_sentences:
+        print(sentence)
 else:
     print(f"The target word '{target_word}' does not exist in any sentence.")
