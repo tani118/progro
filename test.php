@@ -37,7 +37,7 @@ $data = json_decode($response, true);
 // Check if the response contains 'items'
 if (isset($data['items'])) {
     $repositories = $data['items'];
-
+    $user_input = array();
     // Output the repository information
     foreach ($repositories as $repo) {
         echo 'Repository Name: ' . $repo['full_name'] . '<br>';
@@ -45,7 +45,12 @@ if (isset($data['items'])) {
         echo 'URL: ' . $repo['html_url'] . '<br>';
         echo 'Description: ' . $repo['description'] . '<br>';
         echo '<hr>';
+        $loopInput = array($repo['full_name'], $repo['Description']);
+        array_push($user_input, $loopInput);
     }
+    
+    $output = exec("python ai_script.py $user_input");
+
 } else {
     echo "No repositories found matching the search criteria.";
 }
