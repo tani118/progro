@@ -1,4 +1,6 @@
 import spacy
+import json
+import sys
 
 def extract_keywords(sentences, target_word):
     nlp = spacy.load("en_core_web_lg")
@@ -15,18 +17,23 @@ def extract_keywords(sentences, target_word):
     
     return matching_sentences
 
-# Example usage:
-nested_sentences = [
-    ["Sentence 1","Python is better than C++"],
-    ["Sentence 2","Java is another programming language other than Python"]
-]
+if __name__ == "__main__":
+    # Extract input from command-line arguments
+    input_data = json.loads(sys.argv[1])
 
-target_word = "Python"
-matching_sentences = extract_keywords(nested_sentences, target_word)
+    # Extract nested sentences
+    nested_sentences = [(item[0], item[1]) for item in input_data]
 
-if matching_sentences:
-    print(f"The target word '{target_word}' exists in the following sentences:")
-    for sentence in matching_sentences:
-        print(sentence)
-else:
-    print(f"The target word '{target_word}' does not exist in any sentence.")
+    # Specify the target word
+    target_word = "Python"
+
+    # Extract matching sentences
+    matching_sentences = extract_keywords(nested_sentences, target_word)
+
+    # Output the result
+    if matching_sentences:
+        print(f"The target word '{target_word}' exists in the following sentences:")
+        for sentence in matching_sentences:
+            print(sentence)
+    else:
+        print(f"The target word '{target_word}' does not exist in any sentence.")
