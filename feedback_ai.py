@@ -14,11 +14,9 @@ def analyze_feedback(feedback_list):
                 priority_score += 1
             elif token.dep_ == "ROOT":  # Example: prioritize sentences with clear main verbs
                 priority_score += 1
-        # Reverse the priority score
-        priority_score = -priority_score
         feedback_priorities.append((feedback, priority_score))
     # Sort feedback by priority score in descending order
-    sorted_feedback = sorted(feedback_priorities, key=lambda x: x[1], reverse=True)
+    sorted_feedback = sorted(feedback_priorities, key=lambda x: x[1])
     return sorted_feedback
 
 # Example feedback list
