@@ -80,6 +80,17 @@
     $password = mysqli_real_escape_string($con, $_POST['signupPassword']);
     session_start();
     $_SESSION['accountName'] = $username;
+    $fetchHashedPassword = "SELECT password FROM login_ids WHERE username='$username'";
+    $hashedPassword = mysqli_query($con, $query);
+    
+    if (password_verify($password, $hashedPassword)) {
+      header("Location: home_page.php");
+      exit;
+    } else {
+      $message = "Wrong id or ,password";
+      echo "<script>alert('$message');</script>";
+    }
+    /*
     $query = "SELECT * FROM login_ids WHERE username='$username' AND password='$password'";
     $result = mysqli_query($con, $query);
 
@@ -91,7 +102,7 @@
       $message = "Wrong id or ,password";
       echo "<script>alert('$message');</script>";
     }
-
+  */
     mysqli_close($con);
   }
   ?>
