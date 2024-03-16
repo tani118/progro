@@ -8,7 +8,6 @@
             width: 100vw;
             height: 100vw;
             background: linear-gradient(139.06deg, #2b3693 1.86%, #0a0e30 56.22%);
-            background: : no-repeat;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -64,36 +63,44 @@
             text-align: center;
         }
 
-        .description {
-            margin-top: 30px;
-            font-size: 18px;
-        }
+    .description {
+        margin-top: 50px; /* Increased margin for more spacing */
+        font-size: 18px;
+        text-align: justify;
+        line-height: 1.5; /* Adjust line height for better readability */
+        max-width: 800px; /* Limit maximum width to prevent overly long lines */
+        margin: 0 auto; /* Center-align the content */
+        padding: 0 20px; /* Add padding to prevent text from sticking to the edges */
+    }
+</style>
+
     </style>
 </head>
 
 <body>
     <div class="navbar">
         <a href="home_page.php">HOME</a>
-        <a href="routes.php">ROUTES</a>
-        <a href="bus_booking.php">BOOK</a>
-        <a href="bookings.php">BOOKINGS</a>
-        <a href="help.php">HELP</a>
+        <a href="skills.html">EXPLORE</a>
+        <a href=".php">COLLAB</a>
+        <a href=".php">EDITOR</a>
+        <a href=".php">FEEDBACK</a>
         <a href="profile.php">PROFILE</a>
     </div>
     <div class="content">
         <br>
-        <h1>Welcome To Our Website, Blue Bus!</h1>
+        <h1>Welcome To Our Website, ProGo!</h1>
         <br>
     </div>
     <div class="intro">
-        <h2>Navigate Your Journey with Ease: Book Your Bus Adventure Today!</h2>
+        <h2>Find your ideal project now!!</h2>
+        <br>
     </div>
 
     <div class="description">
-        <p>Welcome to Blue Bus, your premier destination for hassle-free bus bookings! With our user-friendly interface and extensive route network, planning your next journey has never been easier.</p>
-        <p>Explore our wide range of routes, book your tickets with just a few clicks, and manage your bookings effortlessly through our intuitive platform.</p>
-        <p>Whether you're a frequent traveler or planning a one-time trip, Blue Bus is here to make your travel experience seamless and enjoyable. Start your adventure with us today!</p>
-    </div>
+    <p>Welcome to ProGo, your go-to platform for hassle-free project collaboration and development! Explore diverse projects tailored to your skills and interests. Join forces with like-minded individuals, share ideas, and bring your projects to life with our seamless collaboration tools. Start collaborating today!</p>
+</div>
+
+
 
     <script type="text/javascript">
 
