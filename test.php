@@ -28,7 +28,11 @@
   <form action="process_selection.php" method="post"> <!-- Form for selecting repositories -->
     <?php
     $ch = curl_init();
-
+    if(isset() = 'POST'){
+$lang = $_POST['language'];
+$skill = $_POST['skill'];
+$skillLevel = $_POST['skillLevel'];
+$threshStarBeginner = 5000;
     // Define search criteria for repositories written in C++ with stars between 500 and 1000$threshStarBeginner = 5000;
 $threshStarIntermediate = 10000;
 if ($skillLevel == "b") {
@@ -38,6 +42,7 @@ if ($skillLevel == "b") {
 } elseif ($skillLevel == "a") {
     $search_criteria = 'language:' . $lang . ' topic:' . $skill . ' stars:' . ($threshStarIntermediate + 1);
 }
+    }
 
     $url = 'https://api.github.com/search/repositories?q=' . urlencode($search_criteria);
 
