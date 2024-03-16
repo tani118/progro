@@ -67,34 +67,42 @@
     </form>
   </div>
 
-  <?php
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+<?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $con = mysqli_connect("localhost", "root", "", "ids");
 
     if (mysqli_connect_errno()) {
-      echo "Failed to connect to MySQL: " . mysqli_connect_error();
-      exit();
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        exit();
     }
     mysqli_query($con,"use ids");
     $username = mysqli_real_escape_string($con, $_POST['signupUsername']);
     $password = mysqli_real_escape_string($con, $_POST['signupPassword']);
-    session_start();
+    
     $_SESSION['accountName'] = $username;
-    $query = "SELECT * FROM login_ids WHERE username='$username' AND password='$password'";
-    $result = mysqli_query($con, $query);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-      header("Location: home_page.php");
-      exit;
-      // Redirect to another page or perform further actions as needed
+    
+    $fetchHashedPassword = "SELECT password FROM login_ids WHERE username='$username'";
+    $result = mysqli_query($con, $fetchHashedPassword);
+    
+    if ($row = mysqli_fetch_assoc($result)) {
+        $hashedPasswordInTable = $row['password'];
+        if(password_verify($password, $hashedPasswordInTable)) {
+            header("Location: home_page.php");
+            exit;
+        } else {
+            $message = "Wrong id or password";
+            echo "<script>alert('$message');</script>";
+        }
     } else {
-      $message = "Wrong id or ,password";
-      echo "<script>alert('$message');</script>";
+        $message = "User not found";
+        echo "<script>alert('$message');</script>";
     }
 
     mysqli_close($con);
-  }
-  ?>
+}
+?>
 
 </body>
 </html>
