@@ -86,7 +86,7 @@
         $username = mysqli_real_escape_string($con, $_POST['signupUsername']);
         $email = mysqli_real_escape_string($con, $_POST['email']);
         $unhashedPassword = mysqli_real_escape_string($con, $_POST['signupPassword1']);
-        $password = password_hash($unhashedPassword, PASSWORD_DEFAULT);
+        $password = password_hash($unhashedPassword, PASSWORD_BCRYPT);
 
         $query = "INSERT INTO login_ids (username, email_id, password) VALUES ('$username', '$email', '$password')";
 
