@@ -155,10 +155,10 @@ mysqli_close($con);
 <body>
     <div class="navbar">
         <a href="home_page.php">HOME</a>
-        <a href="routes.php">ROUTES</a>
-        <a href="bus_booking.php">BOOK</a>
-        <a href="bookings.php">BOOKINGS</a>
-        <a href="help.php">HELP</a>
+        <a href="skills.html">EXPLORE</a>
+        <a href=".php">COLLAB</a>
+        <a href=".php">EDITOR</a>
+        <a href=".php">FEEDBACK</a>
         <a href="profile.php">PROFILE</a>
     </div>
     <div class="container">

@@ -1,0 +1,1 @@
+ app crashes frequently when performi
