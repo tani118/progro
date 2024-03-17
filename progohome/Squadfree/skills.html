@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Language Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            background: #4B99BC;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #555;
+        }
+        #languageInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .languageOption {
+            cursor: pointer;
+            padding: 10px;
+        }
+        .languageOption:hover {
+            background-color: #f0f0f0;
+        }
+        #nextButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #nextButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LANGUAGE</h1>
+        <label for="language">Select a programming language:</label>
+        <input type="text" id="languageInput" oninput="filterLanguages()">
+        <div id="languageList"></div>
+        <button id="nextButton" onclick="submitData()">Next</button>
+    </div>
+
+    <script>
+        var languages = [
+    "Python", "Java", "JavaScript", "C", "C++", "C#", "PHP", "Swift", "Go", "Ruby", "Rust",
+    "TypeScript", "Kotlin", "R", "MATLAB", "Perl", "Lua", "Scala", "Dart", "Julia", "Shell",
+    "Objective-C", "HTML", "CSS", "SQL", "Assembly language", "Visual Basic", "Groovy", "Fortran",
+    "COBOL", "Lisp", "Scheme", "Prolog", "Haskell", "Erlang", "Tcl", "ActionScript", "Smalltalk",
+    "F#", "PowerShell", "Ada", "Apex", "VHDL", "Verilog", "Delphi/Object Pascal", "LabVIEW", "Logo",
+    "PL/SQL", "Transact-SQL", "ABAP", "Scratch", "ColdFusion", "Algol", "APL", "AWK", "Bash", "Basic",
+    "COOL", "Dylan", "Eiffel", "Elm", "Factor", "Forth", "J", "ML", "MUMPS", "Oz", "Pascal", "PostScript",
+    "Racket", "Rexx", "S", "Self", "Simula", "Turing", "Wolfram Language", "XQuery", "XPath", "XSLT",
+    "Ceylon", "Clojure", "Crystal", "Datalog", "Elixir", "Emacs Lisp", "FoxPro", "G-code", "Gosu", "Hack",
+    "Haxe", "IDL", "Io", "LiveCode", "Maple", "Mercury", "Nemerle", "Oberon", "Objective-J", "Oxygene",
+    "Red", "Ring", "RPG", "SAS", "Sed", "Squirrel", "Standard ML", "SuperCollider", "TeX", "WebAssembly",
+    "Windows PowerShell", "Winbatch", "X10", "xBase", "XBL", "XC", "XMOS", "Xojo", "XOTcl", "XPL", "YAML",
+    "Z shell"
+];
+
+        function filterLanguages() {
+            const input = document.getElementById("languageInput").value.toLowerCase();
+            const filteredLanguages = languages.filter(language =>
+                language.toLowerCase().includes(input)
+            );
+
+            const languageList = document.getElementById("languageList");
+            languageList.innerHTML = "";
+
+            filteredLanguages.forEach(language => {
+                const option = document.createElement("div");
+                option.textContent = language;
+                option.classList.add("languageOption");
+                option.onclick = () => selectLanguage(language);
+                languageList.appendChild(option);
+            });
+        }
+
+        function selectLanguage(language) {
+            document.getElementById("languageInput").value = language;
+            document.getElementById("languageList").innerHTML = "";
+        }
+
+        function submitData() {
+            const selectedLanguage = document.getElementById("languageInput").value;
+            alert("You have selected: " + selectedLanguage);
+            // Here you can perform further actions with the selected data
+        }
+    </script>
+</body>
+</html>

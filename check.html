@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Code Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Verification Code Checker</h2>
+        <form id="verificationForm">
+            <label for="userCode">Enter Verification Code:</label><br>
+            <input type="text" id="userCode" name="userCode" required><br>
+            <input type="submit" value="Check">
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('verificationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Fetch the verification code from the server
+            fetch('verification_code.txt')
+                .then(response => response.text())
+                .then(data => {
+                    const serverCode = parseInt(data.trim());
+                    const userCode = parseInt(document.getElementById('userCode').value);
+                
+                    // Compare user input with server code
+                    if (userCode === serverCode) {
+                        document.getElementById('result').innerHTML = '<p>Verification successful!</p>';
+                        window.location.href = 'index.html'; // Redirect after successful verification
+                    } else {
+                        document.getElementById('result').innerHTML = '<p>Verification failed. Please try again.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching verification code:', error);
+                    document.getElementById('result').innerHTML = '<p>Failed to fetch verification code. Please try again later.</p>';
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Language Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            background: #4B99BC;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #555;
+        }
+        #languageInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .languageOption {
+            cursor: pointer;
+            padding: 10px;
+        }
+        .languageOption:hover {
+            background-color: #f0f0f0;
+        }
+        #nextButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #nextButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SKILLS</h1>
+        <label for="language">Select your skill:</label>
+        <input type="text" id="languageInput" oninput="filterLanguages()">
+        <div id="languageList"></div>
+        <button id="nextButton" onclick="submitData()">Next</button>
+        <label for="level">Select your level:</label>
+        <div id="levelInput">
+            <input type="radio" id="beginner" name="level" value="beginner">
+            <label for="beginner">Beginner</label><br>
+            <input type="radio" id="intermediate" name="level" value="intermediate">
+            <label for="intermediate">Intermediate</label><br>
+            <input type="radio" id="expert" name="level" value="expert">
+            <label for="expert">Expert</label><br>
+        </div>
+    </div>
+
+    <script>
+        const languages = [
+            "React.js (Frontend)",
+            "Node.js (Backend)",
+            "Express.js (Backend)",
+            "Angular (Frontend)",
+            "Vue.js (Frontend)",
+            "Django (Backend)",
+            "Flask (Backend)",
+            "Laravel (Backend)",
+            "Ruby on Rails (Backend)",
+            "Spring Boot (Backend)",
+            "ASP.NET (Backend)",
+            "ASP.NET Core (Backend)",
+            "ASP.NET MVC (Backend)",
+            "Ember.js (Frontend)",
+            "Meteor (Full stack)",
+            "Symfony (Backend)",
+            "ASP.NET Web API (Backend)",
+            "Flask RESTful (Backend)",
+            "Django REST framework (Backend)",
+            "Xamarin (Mobile)",
+            "React Native (Mobile)",
+            "Flutter (Mobile)",
+            "Ionic (Mobile)",
+            "Swift (Mobile)",
+            "Kotlin (Mobile)",
+            "Java (Backend)",
+            "PHP (Backend)",
+            "Python (Backend)",
+            "Ruby (Backend)",
+            "JavaScript (Frontend/Backend)",
+            "TypeScript (Frontend/Backend)",
+            "HTML/CSS (Frontend)",
+            "Sass (Frontend)",
+            "Less (Frontend)",
+            "Bootstrap (Frontend)",
+            "Tailwind CSS (Frontend)",
+            "Material-UI (Frontend)",
+            "Bulma (Frontend)",
+            "Foundation (Frontend)",
+            "Semantic UI (Frontend)",
+            "jQuery (Frontend)",
+            "Redux (Frontend)",
+            "Vuex (Frontend)",
+            "GraphQL (API)",
+            "RESTful API",
+            "MongoDB (Database)",
+            "PostgreSQL (Database)",
+            "MySQL (Database)",
+            "SQLite (Database)",
+            "Microsoft SQL Server (Database)",
+            "Firebase (Database)",
+            "DynamoDB (Database)",
+            "Redis (Database)",
+            "Cassandra (Database)",
+            "Elasticsearch (Database)",
+            "Docker (DevOps)",
+            "Kubernetes (DevOps)",
+            "Jenkins (DevOps)",
+            "Travis CI (DevOps)",
+            "GitLab CI/CD (DevOps)",
+            "CircleCI (DevOps)",
+            "AWS (Cloud)",
+            "Microsoft Azure (Cloud)",
+            "Google Cloud Platform (Cloud)",
+            "Heroku (PaaS)",
+            "DigitalOcean (Cloud)",
+            "Linode (Cloud)",
+            "Vercel (Cloud)",
+            "Netlify (Cloud)",
+            "GitHub Actions (DevOps)",
+            "Terraform (Infrastructure as Code)",
+            "Ansible (Infrastructure as Code)",
+            "Chef (Infrastructure as Code)",
+            "Puppet (Infrastructure as Code)",
+            "Apache Kafka (Messaging)",
+            "RabbitMQ (Messaging)",
+            "NATS (Messaging)",
+            "MQTT (Messaging)",
+            "gRPC (Remote Procedure Call)",
+            "WebSockets (Communication Protocol)",
+            "Socket.IO (Real-time Communication)",
+            "Twilio (Communication API)",
+            "SendGrid (Email API)",
+            "Stripe (Payment Processing)",
+            "PayPal (Payment Processing)",
+            "Square (Payment Processing)",
+            "Braintree (Payment Processing)",
+            "Authorize.Net (Payment Processing)",
+            "Google Pay (Payment Processing)",
+            "Apple Pay (Payment Processing)",
+            "Stripe (Payment Processing)",
+            "Auth0 (Authentication)",
+            "Firebase Authentication (Authentication)",
+            "Okta (Authentication)",
+            "Keycloak (Authentication)",
+            "JWT (Authentication)",
+            "OAuth (Authentication)",
+            "SSL/TLS (Security)",
+            "OWASP (Security)",
+            "DevOps (Culture/Practice)"
+        ];
+
+        function filterLanguages() {
+            const input = document.getElementById("languageInput").value.toLowerCase();
+            const filteredLanguages = languages.filter(language =>
+                language.toLowerCase().includes(input)
+            );
+
+            const languageList = document.getElementById("languageList");
+            languageList.innerHTML = "";
+
+            filteredLanguages.forEach(language => {
+                const option = document.createElement("div");
+                option.textContent = language;
+                option.classList.add("languageOption");
+                option.onclick = () => selectLanguage(language);
+                languageList.appendChild(option);
+            });
+        }
+
+        function selectLanguage(language) {
+            document.getElementById("languageInput").value = language;
+            document.getElementById("languageList").innerHTML = "";
+        }
+
+        function submitData() {
+            const selectedLanguage = document.getElementById("languageInput").value;
+            alert("You have selected: " + selectedLanguage);
+            // Here you can perform further actions with the selected data
+window.location.href = "skills.html";
+        }
+    </script>
+</body>
+</html>

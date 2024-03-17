@@ -89,11 +89,20 @@
         $password = password_hash($unhashedPassword, PASSWORD_BCRYPT);
 
         $query = "INSERT INTO login_ids (username, email_id, password) VALUES ('$username', '$email', '$password')";
-
+        $file = fopen("email.txt", "w")  or die("Unable to open file!");;
+            fwrite($file, $email . "\n");
+            fclose($file);
+            exec("python automated_mail.py");
+        
         if (mysqli_query($con, $query)) {
+            // Registration Successful
             $message = "Registration Successful!";
             echo "<script>alert('$message');</script>";
-            header("Location: login.php");
+
+            // Add email to email.txt file
+            
+
+            header("Location: check.html");
             exit;
         } else {
             echo "Error: " . mysqli_error($con);
