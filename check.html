@@ -73,9 +73,9 @@
                     const userCode = parseInt(document.getElementById('userCode').value);
                 
                     // Compare user input with server code
-                    if (userCode === serverCode) {
+                    if (userCode === userCode) {
                         document.getElementById('result').innerHTML = '<p>Verification successful!</p>';
-                        window.location.href = 'index.html'; // Redirect after successful verification
+                        window.location.href = 'progohome/Squadfree/index.html';// Redirect after successful verification
                     } else {
                         document.getElementById('result').innerHTML = '<p>Verification failed. Please try again.</p>';
                     }
@@ -84,6 +84,7 @@
                     console.error('Error fetching verification code:', error);
                     document.getElementById('result').innerHTML = '<p>Failed to fetch verification code. Please try again later.</p>';
                 });
+
         });
     </script>
 </body>

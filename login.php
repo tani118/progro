@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($row = mysqli_fetch_assoc($result)) {
         $hashedPasswordInTable = $row['password'];
-        if(password_verify($password, $hashedPasswordInTable)) {
+        if(password_verify($password, $fetchHashedPassword)) {
             header("Location: home_page.php");
             exit;
         } else {

@@ -37,7 +37,7 @@
             echo "<h3>Collaborators for repository '$repo_name':</h3>";
             while($row = $result->fetch_assoc()) {
                 $username = $row["username"];
-
+                exec("python mail.py");
                 // Check if colab variable is true for this user
                 $colab_sql = "SELECT * FROM user_project WHERE username = '$username' AND reponame = '$repo_name' AND colab = 1";
                 $colab_result = $conn->query($colab_sql);

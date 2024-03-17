@@ -70,8 +70,9 @@
         <label for="language">Select your skill:</label>
         <input type="text" id="languageInput" oninput="filterLanguages()">
         <div id="languageList"></div>
-        <button id="nextButton" onclick="submitData()">Next</button>
+        
         <label for="level">Select your level:</label>
+        <form method="POST"  action="test.php">
         <div id="levelInput">
             <input type="radio" id="beginner" name="level" value="beginner">
             <label for="beginner">Beginner</label><br>
@@ -80,6 +81,8 @@
             <input type="radio" id="expert" name="level" value="expert">
             <label for="expert">Expert</label><br>
         </div>
+    </form>
+    <button id="nextButton" onclick="submitData()">Next</button>
     </div>
 
     <script>

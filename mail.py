@@ -15,7 +15,7 @@ with open("email.txt", "r") as file:
 
 email_receiver=content
 subject='Verification from ProGro'
-body = "Dear User,\n\nYour verification code is:"+code+" \n\nPlease use this code to verify your email address.\n\nThank you,\nprogo Team"
+body = "Dear User,\n\nthis is a collaboration request mail"
 
 print(body)
 em= EmailMessage()

@@ -2,7 +2,9 @@ import spacy
 
 # Load English tokenizer, tagger, parser, NER, and word vectors
 nlp = spacy.load("en_core_web_sm")
-
+with open("reviews.txt", "r") as file:
+    # Read the content of the file
+    content = file.read()
 def analyze_feedback(feedback_list):
     feedback_priorities = []
     for feedback in feedback_list:
@@ -21,11 +23,7 @@ def analyze_feedback(feedback_list):
 
 # Example feedback list
 feedback_list = [
-    "The user interface is user-friendly and intuitive.",
-    "The app crashes frequently when performing certain actions.",
-    "I love the new feature updates. Keep up the good work!",
-    "There are too many ads in the free version of the app.",
-    "The customer support team was very helpful and responsive."
+    content
 ]
 
 # Analyze feedback and sort by priority
@@ -33,4 +31,4 @@ sorted_feedback = analyze_feedback(feedback_list)
 
 # Print sorted feedback
 for idx, (feedback, priority_score) in enumerate(sorted_feedback, start=1):
-    print(f"{idx}. Priority Score: {priority_score} - Feedback: {feedback}")
+    return(priority_score)
